@@ -7,12 +7,17 @@ from .outliers import detect_outliers
 from .imbalance import class_imbalance
 from .leakage import detect_leakage
 from .html_generator import create_html
+from .visualization import (
+    missing_plot,
+    correlation_plot
+)
 
 
 def report(
         df,
         target=None,
         output=False
+        
 ):
 
     result={}
@@ -28,6 +33,9 @@ def report(
     result["correlation"]=correlation_analysis(df)
 
     result["outliers"]=detect_outliers(df)
+
+    missing_plot(df)
+    correlation_plot(df)
 
     if target:
 
