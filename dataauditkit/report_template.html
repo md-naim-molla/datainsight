@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>DataAuditKit Report</title>
+<style>
+body{font-family:Arial;margin:40px;}
+h1{color:#2c3e50;}
+section{margin-bottom:30px;padding:15px;border:1px solid #ddd;border-radius:10px;}
+h2{color:#34495e;}
+pre{background:#f8f9fa;padding:10px;border-radius:5px;overflow-x:auto;}
+table{border-collapse:collapse;width:100%;}
+th,td{border:1px solid #ddd;padding:8px;text-align:left;}
+th{background-color:#f2f2f2;}
+</style>
+</head>
+<body>
+
+<h1>DataAuditKit Report</h1>
+
+<section>
+<h2>Dataset Summary</h2>
+<table>
+<tr><th>Metric</th><th>Value</th></tr>
+<tr><td>Rows</td><td>{{ summary.rows }}</td></tr>
+<tr><td>Columns</td><td>{{ summary.columns }}</td></tr>
+<tr><td>Memory (MB)</td><td>{{ summary.memory_mb }}</td></tr>
+<tr><td>Duplicates</td><td>{{ summary.duplicates }}</td></tr>
+</table>
+</section>
+
+<section>
+<h2>Missing Values</h2>
+<table>
+<tr><th>Column</th><th>Count</th><th>Percent</th></tr>
+{% for col in missing.missing_count.keys() %}
+<tr>
+<td>{{ col }}</td>
+<td>{{ missing.missing_count[col] }}</td>
+<td>{{ missing.missing_percent[col] }}%</td>
+</tr>
+{% endfor %}
+</table>
+</section>
+
+<section>
+<h2>Duplicate Rows</h2>
+<p>Total duplicate rows: <strong>{{ duplicates.duplicates }}</strong></p>
+</section>
+
+<section>
+<h2>Statistics</h2>
+{% for col, stats in statistics.items() %}
+<h3>{{ col }}</h3>
+<table>
+<tr><th>Statistic</th><th>Value</th></tr>
+{% for stat, val in stats.items() %}
+<tr><td>{{ stat }}</td><td>{{ val }}</td></tr>
+{% endfor %}
+</table>
+{% endfor %}
+</section>
+
+<section>
+<h2>Correlation</h2>
+{% for col1, row in correlation.items() %}
+<h3>{{ col1 }}</h3>
+<table>
+<tr><th>Column</th><th>Correlation</th></tr>
+{% for col2, val in row.items() %}
+{% if col1 != col2 %}
+<tr><td>{{ col2 }}</td><td>{{ "%.3f"|format(val) }}</td></tr>
+{% endif %}
+{% endfor %}
+</table>
+{% endfor %}
+</section>
+
+<section>
+<h2>Outliers</h2>
+<table>
+<tr><th>Column</th><th>Outlier Count</th></tr>
+{% for col, count in outliers.items() %}
+<tr><td>{{ col }}</td><td>{{ count }}</td></tr>
+{% endfor %}
+</table>
+</section>
+
+{% if imbalance %}
+<section>
+<h2>Target Imbalance</h2>
+<p>Imbalance ratio (min/max): <strong>{{ imbalance.imbalance_ratio }}</strong></p>
+<table>
+<tr><th>Class</th><th>Count</th></tr>
+{% for cls, count in imbalance.class_counts.items() %}
+<tr><td>{{ cls }}</td><td>{{ count }}</td></tr>
+{% endfor %}
+</table>
+</section>
+{% endif %}
+
+{% if leakage %}
+<section>
+<h2>Leakage Detection</h2>
+<table>
+<tr><th>Suspicious Column</th><th>Correlation with Target</th></tr>
+{% for col, val in leakage.items() %}
+<tr><td>{{ col }}</td><td>{{ val }}</td></tr>
+{% endfor %}
+</table>
+</section>
+{% endif %}
+
+</body>
+</html>

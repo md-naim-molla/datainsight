@@ -1,16 +1,5 @@
 def numeric_statistics(df):
-
-    numeric=df.select_dtypes(
-        include="number"
-    )
-
+    numeric = df.select_dtypes(include="number")
+    if numeric.empty or numeric.columns.size == 0:
+        return {}
     return numeric.describe().to_dict()
-
-
-def categorical_statistics(df):
-
-    categorical=df.select_dtypes(
-        exclude="number"
-    )
-
-    return categorical.describe().to_dict()

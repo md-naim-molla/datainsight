@@ -1,16 +1,40 @@
 import pandas as pd
-
 from dataauditkit.outliers import detect_outliers
 
 
-def test_outliers():
+def test_outlier_present():
+    df = pd.DataFrame({"A": [1, 2, 3, 4, 100]})
+    result = detect_outliers(df)
+    assert result["A"] == 1
 
-    df=pd.DataFrame({
 
-        "A":[1,2,3,4,100]
+def test_no_outliers():
+    df = pd.DataFrame({"A": [1, 2, 3, 4, 5]})
+    result = detect_outliers(df)
+    assert result["A"] == 0
 
-    })
 
-    result=detect_outliers(df)
+def test_outliers_multiple_columns():
+    df = pd.DataFrame({"A": [1, 2, 3, 4, 100], "B": [10, 20, 30, 40, 500]})
+    result = detect_outliers(df)
+    assert result["A"] == 1
+    assert result["B"] == 1
 
-    assert result["A"]==1
+
+def test_non_numeric_columns_skipped():
+    df = pd.DataFrame({"A": [1, 2, 3], "B": ["x", "y", "z"]})
+    result = detect_outliers(df)
+    assert "A" in result
+    assert "B" not in result
+
+
+def test_constant_column_no_outliers():
+    df = pd.DataFrame({"A": [5, 5, 5, 5, 5]})
+    result = detect_outliers(df)
+    assert result["A"] == 0
+
+
+def test_empty_dataframe():
+    df = pd.DataFrame()
+    result = detect_outliers(df)
+    assert result == {}

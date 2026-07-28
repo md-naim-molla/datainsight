@@ -19,7 +19,7 @@ Features:
 Example:
 
 ```python
-from datainsight import report
+from dataauditkit import report
 
 result = report(
     df,
