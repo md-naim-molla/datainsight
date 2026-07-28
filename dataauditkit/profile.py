@@ -83,6 +83,11 @@ class ProfileReport:
             results["missing_patterns"] = missing_patterns(df)
 
         if target:
+            if target not in df.columns:
+                raise ValueError(
+                    f"Target column '{target}' not found in DataFrame. "
+                    f"Available columns: {list(df.columns)}"
+                )
             results["imbalance"] = class_imbalance(df, target)
             results["leakage"] = detect_leakage(df, target, threshold=config.leakage_threshold)
 
