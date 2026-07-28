@@ -1,5 +1,5 @@
 import pandas as pd
-from datainsight.duplicates import duplicate_report
+from dataauditkit.duplicates import duplicate_report
 
 
 def test_duplicates():

@@ -1,4 +1,4 @@
-# DataInsight
+# DataAuditkit
 
 Automatic Data Quality and EDA Toolkit for Python.
 

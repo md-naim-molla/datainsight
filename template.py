@@ -1,11 +1,11 @@
 from pathlib import Path
 
 # Root project folder
-project = Path("datainsight")
+project = Path("dataauditkit")
 
 # Folder structure
 folders = [
-    project / "datainsight",
+    project / "dataauditkit",
     project / "tests",
     project / "examples",
     project / "docs"
@@ -13,14 +13,14 @@ folders = [
 
 # Files to create
 files = [
-    project / "datainsight" / "__init__.py",
-    project / "datainsight" / "summary.py",
-    project / "datainsight" / "missing.py",
-    project / "datainsight" / "outliers.py",
-    project / "datainsight" / "correlation.py",
-    project / "datainsight" / "leakage.py",
-    project / "datainsight" / "visualization.py",
-    project / "datainsight" / "report.py",
+    project / "dataauditkit" / "__init__.py",
+    project / "dataauditkit" / "summary.py",
+    project / "dataauditkit" / "missing.py",
+    project / "dataauditkit" / "outliers.py",
+    project / "dataauditkit" / "correlation.py",
+    project / "dataauditkit" / "leakage.py",
+    project / "dataauditkit" / "visualization.py",
+    project / "dataauditkit" / "report.py",
 
     project / "tests" / "test_summary.py",
     project / "tests" / "test_missing.py",

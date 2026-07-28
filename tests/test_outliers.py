@@ -1,6 +1,6 @@
 import pandas as pd
 
-from datainsight.outliers import detect_outliers
+from dataauditkit.outliers import detect_outliers
 
 
 def test_outliers():

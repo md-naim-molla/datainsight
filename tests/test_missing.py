@@ -1,5 +1,5 @@
 import pandas as pd
-from datainsight.missing import missing_report
+from dataauditkit.missing import missing_report
 
 
 def test_missing():

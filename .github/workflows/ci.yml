@@ -1,4 +1,4 @@
-name: DataInsight CI
+name: DataAuditKit CI
 
 on:
   push:

@@ -1,6 +1,6 @@
 import pandas as pd
 
-from datainsight.imbalance import class_imbalance
+from dataauditkit.imbalance import class_imbalance
 
 
 def test_imbalance():

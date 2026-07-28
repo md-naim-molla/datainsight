@@ -1,6 +1,6 @@
 import pandas as pd
 
-from datainsight.summary import dataset_summary
+from dataauditkit.summary import dataset_summary
 
 
 def test_summary():
