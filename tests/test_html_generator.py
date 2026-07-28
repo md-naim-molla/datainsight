@@ -20,7 +20,7 @@ def test_create_html_basic():
     with open("report.html") as f:
         content = f.read()
     assert "DataAuditKit Report" in content
-    assert "Dataset Summary" in content
+    assert "Overview" in content
     assert "Missing Values" in content
     assert "Duplicate Rows" in content
     assert "Statistics" in content

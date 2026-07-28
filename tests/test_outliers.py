@@ -38,3 +38,21 @@ def test_empty_dataframe():
     df = pd.DataFrame()
     result = detect_outliers(df)
     assert result == {}
+
+
+def test_zscore_outliers():
+    df = pd.DataFrame({"A": [10, 10, 10, 10, 1000]})
+    result = detect_outliers(df, method="zscore", zscore_threshold=1.5)
+    assert result["A"] == 1
+
+
+def test_zscore_no_outliers():
+    df = pd.DataFrame({"A": [1, 2, 3, 4, 5]})
+    result = detect_outliers(df, method="zscore", zscore_threshold=3.0)
+    assert result["A"] == 0
+
+
+def test_zscore_constant_column():
+    df = pd.DataFrame({"A": [5, 5, 5, 5, 5]})
+    result = detect_outliers(df, method="zscore")
+    assert result["A"] == 0

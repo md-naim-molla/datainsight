@@ -23,3 +23,6 @@ requires-python = ">=3.8"
 [tool.setuptools]
 packages = ["dataauditkit"]
 package-data = {"dataauditkit" = ["*.html"]}
+
+[project.scripts]
+dataauditkit = "dataauditkit.cli:main"

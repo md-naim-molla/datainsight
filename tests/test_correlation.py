@@ -40,3 +40,15 @@ def test_correlation_empty_dataframe():
     df = pd.DataFrame()
     result = correlation_analysis(df)
     assert result == {}
+
+
+def test_correlation_spearman():
+    df = pd.DataFrame({"A": [1, 2, 3, 4, 5], "B": [2, 4, 6, 8, 10]})
+    result = correlation_analysis(df, method="spearman")
+    assert result["A"]["B"] == pytest.approx(1.0, rel=0.01)
+
+
+def test_correlation_kendall():
+    df = pd.DataFrame({"A": [1, 2, 3, 4, 5], "B": [2, 4, 6, 8, 10]})
+    result = correlation_analysis(df, method="kendall")
+    assert result["A"]["B"] == pytest.approx(1.0, rel=0.01)

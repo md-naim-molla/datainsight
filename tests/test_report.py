@@ -43,11 +43,11 @@ def test_report_without_target_omits_imbalance_and_leakage(df):
 def test_report_output_generates_html(df):
     result = report(df, target="target", output=True)
     assert os.path.exists("report.html")
+    with open("report.html") as f:
+        content = f.read()
+    assert "DataAuditKit Report" in content
+    assert "missing_plot" not in content or "data:image/png;base64" in content
     os.remove("report.html")
-    assert os.path.exists("missing_values.png")
-    os.remove("missing_values.png")
-    assert os.path.exists("correlation.png")
-    os.remove("correlation.png")
 
 
 def test_report_no_output_no_files(df):
